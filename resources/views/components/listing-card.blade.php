@@ -2,7 +2,7 @@
 
  <!-- Featured jersey Cards -->
  <div class="bg-white shadow rounded-lg p-4 flex flex-col md:flex-row gap-4 items-center">
-    <img src="https://www.adidas.co.id/media/catalog/product/h/3/h35902_fr_torso_ecom.jpg" alt="Hostel Image" class="w-96 md:w-1/3 h-44 rounded-lg">
+    <img src="{{$listing->logo ? asset('storage/'.$listing->logo):asset('https://rezista.in/wp-content/uploads/2021/07/Red-Front-6.png')}}" alt="Hostel Image" class="w-96 md:w-1/3 h-44 rounded-lg">
     <div class=" md:w-2/3 flex flex-col gap-2">
         <h3 class="text-lg font-semibold">{{$listing->title}}</h3>
         <x-listing-tags :tagsCsv="$listing->tags" />

@@ -6,7 +6,7 @@
     <div class="bg-white shadow rounded-lg p-4">
         <div class="flex flex-col md:flex-row  md:justify-center md:gap-12 sm:items-start">
             
-            <img src="https://www.adidas.co.id/media/catalog/product/h/3/h35902_fr_torso_ecom.jpg" alt="Jersey Image" class="h-96 md:w-1/3 rounded-lg mb-4">
+            <img src="{{$listing->logo ? asset('storage/'.$listing->logo):asset('https://rezista.in/wp-content/uploads/2021/07/Red-Front-6.png')}}" alt="Jersey Image" class="h-96 md:w-1/3 rounded-lg mb-4">
             <div class="flex flex-col gap-2">
                 <h3 class="text-lg font-semibold">{{$listing->title}}</h3>
                 {{-- tags --}}
@@ -26,6 +26,12 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="mt-4 p-2 flex space-x-6">
+        <a href="/listings/{{$listing->id}}/edit">
+            <i class="fa fa-pencil"></i> Edit
+        </a>
     </div>
 
 </div>
