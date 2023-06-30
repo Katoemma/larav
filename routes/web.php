@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ListingController;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,23 @@ Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
 //edit submit to update
 Route::put('/listings/{listing}', [ListingController::class, 'update']);
 
+//delte listing
+Route::delete('/listings/{listing}', [ListingController::class, 'delete']);
+
 //single listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+//show sign up form
+Route::get('/register', [UserController::class, 'create']);
+
+//create user
+Route::post('/users', [UserController::class, 'store']);
+
+//log user out
+Route::post('/logout', [UserController::class, 'logout']);
+
+//show login form
+Route::get('/login', [UserController::class,'login']);
+
+//login user
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);

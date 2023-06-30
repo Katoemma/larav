@@ -18,10 +18,23 @@
     
             <!-- Navigation Menu -->
             <nav>
+                @auth
                 <ul class="flex space-x-4">
-                    <li><a href="#" class="text-white flex gap-2 items-center text-lg hover:text-gray-200"><i class="fa fa-user-plus"></i>Register</a></li>
-                    <li><a href="#" class="text-white flex gap-2 items-center text-lg hover:text-gray-200"><i class="fa fa-sign-in"></i>Login</a></li>
+                    <span class="text-white uppercase font-bold pr-6">
+                        Welcome {{auth()->user()->name}}
+                    </span>
+                    <li><a href="/listings/manage" class="text-white flex gap-2 items-center text-lg hover:text-gray-200"><i class="fa fa-gear"></i>manage jerseys</a></li>
+                    <form action="/logout" class="inline" method="post">
+                        @csrf
+                        <button type="submit" class="text-white flex gap-2 items-center text-lg hover:text-gray-200"><i class="fa fa-sign-out"></i>Logout</button>
+                    </form>
                 </ul>
+                @else
+                <ul class="flex space-x-4">
+                    <li><a href="/register" class="text-white flex gap-2 items-center text-lg hover:text-gray-200"><i class="fa fa-user-plus"></i>Register</a></li>
+                    <li><a href="/login" class="text-white flex gap-2 items-center text-lg hover:text-gray-200"><i class="fa fa-sign-in"></i>Login</a></li>
+                </ul>
+                @endauth
             </nav>
         </div>
     </header>

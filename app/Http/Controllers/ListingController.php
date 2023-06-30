@@ -77,5 +77,11 @@ class ListingController extends Controller
 
         return back()->with('message', 'Jersey successfully edited');
     }
+    //delete listing
+    public function delete(Listing $listing){
+        $listing-> delete();
+        
+        return redirect('/')->with('message', 'Jersey deleted successfully');
+    }
     
 }

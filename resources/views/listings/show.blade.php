@@ -32,6 +32,12 @@
         <a href="/listings/{{$listing->id}}/edit">
             <i class="fa fa-pencil"></i> Edit
         </a>
+
+        <form action="/listings/{{$listing->id}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button class="text-red-600"><i class="fa fa-trash text-red-500"></i> Delete</button>
+        </form>
     </div>
 
 </div>
