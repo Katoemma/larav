@@ -13,8 +13,7 @@ class ListingController extends Controller
     // Show all listings
     public function index() {
         return view('listings.index', [
-            'listings' => Listing::latest()->filter
-            (request(['tag','search']))->paginate(4)
+            'listings' => Listing::latest()->filter(request(['tag','search']))->paginate(4)
         ]);
     }
 
@@ -45,6 +44,8 @@ class ListingController extends Controller
         if ($request -> hasFile('logo')) {
             $formFields['logo']= $request->file('logo')->store('logos', 'public');
         }
+        //attaching the user id to own the jersey
+        $formFields['user_id']= auth()->id();
 
         Listing::create($formFields);
 
@@ -57,6 +58,10 @@ class ListingController extends Controller
     }
     //updating the listing
     public function update(Request $request, Listing $listing){
+        //make sure logged in user is the owner
+        if($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
         $formFields = $request->validate([
             'title'=> 'required',
             'company'=>'required',
@@ -79,9 +84,16 @@ class ListingController extends Controller
     }
     //delete listing
     public function delete(Listing $listing){
+        if($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
         $listing-> delete();
         
         return redirect('/')->with('message', 'Jersey deleted successfully');
     }
     
+    //mange listing
+    public function manage(){
+        return view('listings.manage', ['listings'=> auth()->user()->listings()->get()]);
+    }
 }
